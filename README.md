@@ -1,53 +1,80 @@
-# 42 Project Minishell 👋
+# Minishell - As Beautiful as a Shell
 
-> Minishell is a 42 school project. In this project we need to recreate a simple Shell
-> Based in Bash, and we also need to implemente some "Builtins".
-> A Builtin is a reproduction of real command in a Shell.
-> We need to recreate : cd, pwd, unset, export, echo, env, exit.
+![Language](https://img.shields.io/badge/Language-C-blue?style=for-the-badge&logo=c&logoColor=white)
+![Bash](https://img.shields.io/badge/System-Bash_Like-4EAA25?style=for-the-badge&logo=gnu-bash&logoColor=white)
+![42 School](https://img.shields.io/badge/School-42-000000?style=for-the-badge&logo=42&logoColor=white)
+![Status](https://img.shields.io/badge/Grade-101%2F100-success?style=for-the-badge)
 
-### [Homepage](https://github.com/NaYruk/Minishell)
+## 📝 Description
 
-## Correction :
+**Minishell** is a 42 School project aimed at creating a simple shell.
+The goal is to understand the inner workings of a shell, specifically **process management** (`fork`, `execve`, `waitpid`), **file descriptors** (redirections, pipes), and **signal handling**.
 
-Validated : **22/04/2025**
-Grade : ✅ **101%** ✅
+## ✨ Features
 
-## Compile :
+### 🔹 Builtins
+We re-implemented the following builtins from scratch:
+* `echo` with `-n` option.
+* `cd` with relative or absolute paths.
+* `pwd` (Print Working Directory).
+* `export` to manage environment variables.
+* `unset` to remove environment variables.
+* `env` to display the environment.
+* `exit` to handle shell termination and status codes.
 
-On Linux :
-- Need to install the readline Library DEBIAN/UBUNTU : `sudo apt install libreadline-dev`
-- Just do `make` and `./minishell`
+### 🔹 Shell Capabilities
+* **Pipes (`|`)**: Connects the output of a command to the input of the next.
+* **Redirections**:
+    * `<` (Input)
+    * `>` (Output - Truncate)
+    * `>>` (Output - Append)
+    * `<<` (Here-doc)
+* **Environment Variables**: Expands variables like `$HOME` or `$?`.
+* **Signals**: Handles `Ctrl-C`, `Ctrl-D`, and `Ctrl-\` appropriately (interactive vs non-interactive mode).
 
-On MacOS :
-- Need to install the readline Libary : `brew install readline`
-- Need to add the library in the Makefile :
-	For example :
-	- add : `-I/opt/homebrew/opt/readline/include`, in INCLUDE =
-	- add : `-L/opt/homebrew/opt/readline/lib -lreadline -o` 
-		in `@$(CC) $(CFLAGS) $(OBJ) $(LIBFT_LIB) $(NAME)`
-- Just do `make` and `./minishell`
+## 🛠️ Installation & Usage
 
-The valgrind.supp file is here for delete the readline valgrind error.
-The readline function have some leaks, this is not to manage in minishell.
-you can activate the valgrind.supp file with : 
-- `--suppressions=valgrind.supp --gen-suppressions=all`
+### Prerequisites
+You need `readline` library installed.
 
-## 🎉 A prompt will be appear, you can enjoy in this beautiful Shell ! 🎉
-> Precision : This is not the real bash comportement, this is a simple reproduction.
+**Linux (Debian/Ubuntu):**
+```bash
+sudo apt install libreadline-dev
+```
 
-## Subject :
+**MacOS:**
+```bash
+brew install readline
 
-Link to the Minishell Subject : [Subject](https://github.com/NaYruk/Minishell/blob/master/Minishell_Subject.pdf)
+# Note: You might need to link readline in the Makefile if not found automatically:
+# -I/opt/homebrew/opt/readline/include
+# -L/opt/homebrew/opt/readline/lib
+```
 
-## 🪲 Debug : 🪲
+**Compile & Run:**
 
-For debug we have mostly used two tester :
+```bash
+make && ./minishell
+```
+
+**Valgrind & Memory Leaks:**
+
+A valgrind.supp file is provided to suppress false positives related to the readline library (which creates reachable leaks on some systems).
+
+```bash
+valgrind --suppressions=valgrind.supp ./minishell
+```
+
+**Testing:**
+
+We used extensive testing suites to ensure robustness:
+
 - MPANIC tester : (https://github.com/ChewyToast/mpanic)
 - Minishell tester : (https://github.com/LucasKuhn/minishell_tester)
 
-## Author ✍️
+## Authors ✍️
 
-**NaYruk and Mcotonea Mulhouse 42 Students**
+This project was built by a duo:
 
-* Github: [@NaYruk](https://github.com/NaYruk)
-* Github: [@Mcotonea](https://github.com/mcotonea42)
+* **COTONEA Melvin** - [Voir le profil GitHub](https://github.com/mcotonea42)
+* **MILLIOT Marc** - [Voir le profil GitHub](https://github.com/NaYruk)
